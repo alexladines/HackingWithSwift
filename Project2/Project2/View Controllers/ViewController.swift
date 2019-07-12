@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         button3.layer.borderColor = UIColor.lightGray.cgColor
 
 
-        askQuestion()
+        askQuestion(action: nil)
     }
 
     // MARK: - Methods

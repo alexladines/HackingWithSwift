@@ -42,7 +42,7 @@ class ViewController: UIViewController {
     }
 
     // MARK: - Methods
-    func askQuestion() {
+    func askQuestion(action: UIAlertAction! = nil) {
         countries.shuffle()
         button1.setImage(UIImage(named: countries[0]), for: .normal)
         button2.setImage(UIImage(named: countries[1]), for: .normal)

@@ -66,7 +66,7 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: "Total Score: \(score)", message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Continue", style: .default, handler: askQuestion)
         alert.addAction(action)
-        present(alert,animated: true)
+        present(alert,animated: false)
 
     }
 

@@ -42,7 +42,7 @@ class ViewController: UIViewController {
     }
 
     // MARK: - Methods
-    func askQuestion(action: UIAlertAction! = nil) {
+    func askQuestion(action: UIAlertAction!) {
         countries.shuffle()
         button1.setImage(UIImage(named: countries[0]), for: .normal)
         button2.setImage(UIImage(named: countries[1]), for: .normal)
@@ -54,19 +54,21 @@ class ViewController: UIViewController {
     // MARK: - IBActions
 
     @IBAction func flagButtonTapped(_ sender: UIButton) {
-        var message = ""
+        var title: String
+
         if sender.tag == correctAnswer {
-            score = score + 1
-            message = "Congrats! You got it right."
+            title = "Correct"
+            score += 1
         }
         else {
-            message = "Whoops! You got it wrong."
+            title = "Wrong"
+            score -= 1
         }
 
-        let alert = UIAlertController(title: "Total Score: \(score)", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: title, message: "Your score is \(score).", preferredStyle: .alert)
         let action = UIAlertAction(title: "Continue", style: .default, handler: askQuestion)
         alert.addAction(action)
-        present(alert,animated: false)
+        present(alert,animated: true)
 
     }
 

@@ -19,21 +19,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v0t-Mk-AuY">
-                                <rect key="frame" x="107" y="104" width="200" height="100"/>
+                                <rect key="frame" x="107" y="138" width="200" height="100"/>
                                 <state key="normal" image="us"/>
                                 <connections>
                                     <action selector="flagButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uzx-hJ-XK0"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUU-ej-VQX">
-                                <rect key="frame" x="107" y="234" width="200" height="100"/>
+                                <rect key="frame" x="107" y="268" width="200" height="100"/>
                                 <state key="normal" image="us"/>
                                 <connections>
                                     <action selector="flagButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pCb-GH-gRn"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTS-y0-XVm">
-                                <rect key="frame" x="107" y="364" width="200" height="100"/>
+                                <rect key="frame" x="107" y="398" width="200" height="100"/>
                                 <state key="normal" image="us"/>
                                 <connections>
                                     <action selector="flagButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mU0-eT-uo0"/>
@@ -42,7 +42,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="v0t-Mk-AuY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="0Ob-px-cEs"/>
+                            <constraint firstItem="v0t-Mk-AuY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="0Ob-px-cEs"/>
                             <constraint firstItem="PTS-y0-XVm" firstAttribute="top" secondItem="CUU-ej-VQX" secondAttribute="bottom" constant="30" id="2Br-a1-IGW"/>
                             <constraint firstItem="CUU-ej-VQX" firstAttribute="centerX" secondItem="v0t-Mk-AuY" secondAttribute="centerX" id="750-Wq-M6B"/>
                             <constraint firstItem="CUU-ej-VQX" firstAttribute="top" secondItem="v0t-Mk-AuY" secondAttribute="bottom" constant="30" id="C9o-cf-1dl"/>

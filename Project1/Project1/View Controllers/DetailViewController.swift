@@ -13,6 +13,8 @@ class DetailViewController: UIViewController {
     // MARK: - Properties
     @IBOutlet weak var imageView: UIImageView!
     var selectedImage: String?
+    var currentPictureIndex: Int?
+    var totalNumberOfPictures: Int?
 
     // MARK: - IBOutlets
 
@@ -34,7 +36,8 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = selectedImage
+        title = "Picture \(currentPictureIndex! + 1) of \(totalNumberOfPictures!)"
+        //title = selectedImage
         navigationItem.largeTitleDisplayMode = .never
 
         if let imageToLoad = selectedImage {

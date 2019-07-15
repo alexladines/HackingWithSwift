@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     var countries: [String] = []
     var score = 0
     var correctAnswer = 0
+    var questionsAsked = 0
 
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -48,7 +49,14 @@ class ViewController: UIViewController {
         button2.setImage(UIImage(named: countries[1]), for: .normal)
         button3.setImage(UIImage(named: countries[2]), for: .normal)
         correctAnswer = Int.random(in: 0...2)
-        title = countries[correctAnswer].uppercased()
+        title = "\(countries[correctAnswer].uppercased()) | Score: \(score)"
+        questionsAsked = questionsAsked + 1
+    }
+
+    func resetGame(action: UIAlertAction!) {
+        score = 0
+        questionsAsked = 0
+        askQuestion(action: nil)
     }
 
     // MARK: - IBActions
@@ -61,15 +69,23 @@ class ViewController: UIViewController {
             score += 1
         }
         else {
-            title = "Wrong"
+            title = "Wrong! That's the flag of \(countries[sender.tag].capitalized)."
             score -= 1
         }
 
-        let alert = UIAlertController(title: title, message: "Your score is \(score).", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Continue", style: .default, handler: askQuestion)
-        alert.addAction(action)
-        present(alert,animated: true)
-
+        if questionsAsked == 10 {
+            let alert = UIAlertController(title: title, message: "Your final score is \(score).", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Continue", style: .default, handler: resetGame)
+            alert.addAction(action)
+            present(alert,animated: true)
+        }
+        else
+        {
+            let alert = UIAlertController(title: title, message: "Your score is \(score).", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Continue", style: .default, handler: askQuestion)
+            alert.addAction(action)
+            present(alert,animated: true)
+        }
     }
 
 }

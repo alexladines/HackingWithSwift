@@ -27,9 +27,6 @@ class PicturesTableViewController: UITableViewController {
 
         navigationController?.navigationBar.prefersLargeTitles = true
 
-        // Create Navigation Bar Button
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
-
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
 

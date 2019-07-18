@@ -21,6 +21,14 @@ class DetailViewController: UIViewController {
     // MARK: - IBActions
 
     // MARK: - Methods
+    @objc func shareTapped() {
+        guard let image = imageView.image?.jpegData(compressionQuality: 0.8) else {
+            print("No image found")
+            return
+        }
+
+        
+    }
 
     // MARK: - Life Cycle
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +52,8 @@ class DetailViewController: UIViewController {
             imageView.image = UIImage(named: imageToLoad)
         }
 
+        // Create Navigation Bar Button
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
     }
 
     // MARK: - Navigation

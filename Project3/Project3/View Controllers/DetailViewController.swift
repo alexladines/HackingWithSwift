@@ -15,26 +15,11 @@ class DetailViewController: UIViewController {
     var selectedImage: String?
     var currentPictureIndex: Int?
     var totalNumberOfPictures: Int?
+    var imageName: String?
 
     // MARK: - IBOutlets
 
     // MARK: - IBActions
-
-    // MARK: - Methods
-    @objc func shareTapped() {
-        guard let image = imageView.image?.jpegData(compressionQuality: 0.8) else {
-            print("No image found")
-            return
-
-        }
-
-            let vc = UIActivityViewController(activityItems: [image],
-                                              applicationActivities: [])
-            vc.popoverPresentationController?.barButtonItem =
-                navigationItem.rightBarButtonItem
-            present(vc, animated: true)
-
-        }
 
     // MARK: - Life Cycle
     override func viewWillAppear(_ animated: Bool) {
@@ -56,11 +41,29 @@ class DetailViewController: UIViewController {
 
         if let imageToLoad = selectedImage {
             imageView.image = UIImage(named: imageToLoad)
+            imageName = imageToLoad
         }
 
         // Create Navigation Bar Button
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
     }
+
+    // MARK: - Methods
+    @objc func shareTapped() {
+        guard let image = imageView.image?.jpegData(compressionQuality: 0.8) else {
+            print("No image found")
+            return
+
+        }
+
+        let vc = UIActivityViewController(activityItems: [image, imageName as! String], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true)
+
+        // Crash if selects save because we need to allow user permission in Info.plist
+
+        }
+
 
     // MARK: - Navigation
     

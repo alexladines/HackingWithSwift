@@ -25,10 +25,16 @@ class DetailViewController: UIViewController {
         guard let image = imageView.image?.jpegData(compressionQuality: 0.8) else {
             print("No image found")
             return
+
         }
 
-        
-    }
+            let vc = UIActivityViewController(activityItems: [image],
+                                              applicationActivities: [])
+            vc.popoverPresentationController?.barButtonItem =
+                navigationItem.rightBarButtonItem
+            present(vc, animated: true)
+
+        }
 
     // MARK: - Life Cycle
     override func viewWillAppear(_ animated: Bool) {

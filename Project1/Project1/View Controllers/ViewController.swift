@@ -56,6 +56,7 @@ class ViewController: UITableViewController {
         return cell
     }
 
+    // MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             
@@ -66,9 +67,6 @@ class ViewController: UITableViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-
-    // MARK: - UITableViewDelegate
-
 
 }
 

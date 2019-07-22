@@ -14,7 +14,7 @@ class WebKitViewController: UIViewController, WKNavigationDelegate {
     // MARK: - Properties
     var webView: WKWebView!
     var progressView: UIProgressView!
-    var websites = ["apple.com", "hackingwithswift.com"]
+    var websiteToLoad: String?
 
     // MARK: - IBOutlets
 
@@ -29,11 +29,12 @@ class WebKitViewController: UIViewController, WKNavigationDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let url = URL(string: "https://" + websites[0])!
+        guard let website = websiteToLoad else { return }
+        let url = URL(string: "https://" + website)!
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(openTapped))
+        // navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(openTapped))
 
         // UIProgressView
         progressView = UIProgressView(progressViewStyle: .default)
@@ -48,27 +49,27 @@ class WebKitViewController: UIViewController, WKNavigationDelegate {
 
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
+        let back = UIBarButtonItem(title: "Back", style: .plain, target: webView, action: #selector(webView.goBack))
+        let forward = UIBarButtonItem(title: "Forward", style: .plain, target: webView, action: #selector(webView.goForward))
 
-        toolbarItems = [progressButton, spacer, refresh]
+        toolbarItems = [progressButton, spacer, back, forward, spacer, refresh]
         navigationController?.isToolbarHidden = false
     }
 
     // MARK: - Methods
-    @objc func openTapped() {
-        let ac = UIAlertController(title: "Open page...", message: nil, preferredStyle: .actionSheet)
-        for website in websites {
-            ac.addAction(UIAlertAction(title: website, style: .default, handler: openPage))
-        }
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        ac.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
-        present(ac,animated: true)
+//    @objc func openTapped() {
+//        let ac = UIAlertController(title: "Open page...", message: nil, preferredStyle: .actionSheet)
+//        ac.addAction(UIAlertAction(title: website, style: .default, handler: openPage))
+//        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+//        ac.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
+//        present(ac,animated: true)
+//
+//    }
 
-    }
-
-    func openPage(action: UIAlertAction) {
-        let url = URL(string: "https://" + action.title!)!
-        webView.load(URLRequest(url: url))
-    }
+//    func openPage(action: UIAlertAction) {
+//        let url = URL(string: "https://" + action.title!)!
+//        webView.load(URLRequest(url: url))
+//    }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
@@ -82,15 +83,15 @@ class WebKitViewController: UIViewController, WKNavigationDelegate {
     // This decisionHandler is also a closure, except it's the other way around – rather than giving someone else a chunk of code to execute,
     // you're being given it and are required to execute it.
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        guard let website = websiteToLoad else { return }
         let url = navigationAction.request.url
 
         if let host = url?.host {
-            for website in websites {
-                if host.contains(website) {
-                    decisionHandler(.allow)
-                    return
-                }
+            if host.contains(website) {
+                decisionHandler(.allow)
+                return
             }
+
         }
 
         decisionHandler(.cancel)

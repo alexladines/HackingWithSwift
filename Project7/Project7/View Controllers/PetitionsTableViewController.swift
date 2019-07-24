@@ -19,6 +19,9 @@ class PetitionsTableViewController: UITableViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(displayInfo))
 
         let urlString: String
         if navigationController?.tabBarItem.tag == 0 {
@@ -57,6 +60,12 @@ class PetitionsTableViewController: UITableViewController {
     func showError() {
         let ac = UIAlertController(title: "Loading error", message: "There was a problem loading the feed; please check your connection and try again.", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(ac,animated: true)
+    }
+
+    @objc func displayInfo() {
+        let ac = UIAlertController(title: nil, message: "The data in this app comes from We The People API of the Whitehouse", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(ac,animated: true)
     }
 
